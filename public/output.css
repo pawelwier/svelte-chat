@@ -634,6 +634,22 @@ video {
   width: 10rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
+.max-w-2xl {
+  max-width: 42rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -695,6 +711,10 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.font-black {
+  font-weight: 900;
 }
 
 .text-white {

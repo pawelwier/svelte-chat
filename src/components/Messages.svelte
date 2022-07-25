@@ -2,6 +2,8 @@
 	import Message from './Message.svelte';
 
   export let chatMessages
+  export let displayMsgDate
+
   const nextMessageSameAuthor = (index) => {
     const nextMessage = chatMessages[index + 1]
     if (!nextMessage) return false
@@ -9,17 +11,10 @@
   }
 </script>
 
-<div class="msg-container">
-  {#each chatMessages as msg, index (msg.id)}
-    <Message
-      {msg}
-      displayAuthor={!nextMessageSameAuthor(index)}
-    />
-  {/each}
-</div>
-
-<style>
-  .msg-container {
-    
-  }
-</style>
+{#each chatMessages as msg, index (msg.id)}
+  <Message
+    {msg}
+    displayAuthor={!nextMessageSameAuthor(index)}
+    {displayMsgDate}
+  />
+{/each}
