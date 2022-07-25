@@ -4,7 +4,7 @@
 </script>
 
 <div class="msg-container">
-  {#each chatMessages as msg}
+  {#each chatMessages as msg (msg.id)}
     <Message {msg} />
   {/each}
 </div>

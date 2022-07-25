@@ -8,7 +8,7 @@
 <div class="msg {isAuthor ? 'msg-author' : 'msg-regular'}">
   <div class="msg-content">
     <div>
-      {msg.content}
+      {@html msg.content}
     </div>
   </div>
 </div>
@@ -39,5 +39,13 @@
 
   .msg-content {
 
+  }
+
+  :global(.user-marked) {
+    font-weight: 900;
+  }
+
+  :global(.user-marked:hover) {
+    cursor: pointer;
   }
 </style>

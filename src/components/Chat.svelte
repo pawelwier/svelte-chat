@@ -18,6 +18,7 @@
 </script>
 
 <div class="chat-container">
+  asdddd
   {#if chatMessages.length}
     <Messages {chatMessages} />
   {/if}
