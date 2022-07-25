@@ -64,9 +64,6 @@
       {/each}
     </div>
   {/if}
-  <div>
-    {msgElements}
-  </div>
 </div>
 
 <style>
