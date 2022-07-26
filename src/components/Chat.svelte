@@ -1,9 +1,7 @@
 <script>
-  import Messages from './Messages.svelte'
   import { messages } from '../data/messages'
+  import Messages from './Messages.svelte'
   import NewMessageInput from './NewMessageInput.svelte'
-
-  export let displayMsgDate
 
   let chatMessages = messages
   let AUTHOR_ID = 1 // TODO: move to store
@@ -21,7 +19,7 @@
 
 <div class="w-96">
   {#if chatMessages.length}
-    <Messages {chatMessages} {displayMsgDate} />
+    <Messages {chatMessages} />
   {/if}
   <NewMessageInput on:add={addMessage} />
 </div>

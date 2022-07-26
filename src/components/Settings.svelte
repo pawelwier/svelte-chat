@@ -1,21 +1,23 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { configStore } from '../store/configStore'
 
-  const dispatch = createEventDispatcher()
+  let displayMsgDate
 
-  let showMsgDate
-
-  const onSetShowMsgDate = () => {
-    dispatch('showMsgDate', showMsgDate) // TODO: move to store
+  $: {
+    configStore.set({
+      displayMsgDate
+    })
   }
 </script>
 
 <div>
+  <h3 class="uppercase font-black text-2xl">
+    Settings
+  </h3>
   <label>
     <input
       type="checkbox"
-      bind:checked={showMsgDate}
-      on:change={onSetShowMsgDate}
+      bind:checked={displayMsgDate}
     />
     <span>
       Show message date
