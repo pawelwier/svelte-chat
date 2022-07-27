@@ -1,16 +1,22 @@
 <script>
-	import Message from './Message.svelte';
+	import ContextMenu from './ContextMenu.svelte';
+  import Message from './Message.svelte'
 
-  export let chatMessages
+  export let chatMessages // TODO: move to store
   
   let showContextMenu
-  $: pos = { x: 0, y: 0 };
-
-  const toggleContextMenu = (e) => {
+  let activeMsg
+  
+  const displayContextMenu = (e, msg) => {
     const event = e.detail
-    showContextMenu = !showContextMenu
+    showContextMenu = true
     pos = { x: event.clientX, y: event.clientY }; // TODO: move to component
-    console.log(pos)
+    activeMsg = msg
+  }
+
+  const onDelete = (e) => {
+    chatMessages = chatMessages.filter(({ id }) => id !== e.detail)
+    showContextMenu = false
   }
 
   const messagesSameAuthor = (index) => {
@@ -33,18 +39,23 @@
       next
     }
   }
+  
+  $: pos = { x: 0, y: 0 };
 </script>
 
 {#each chatMessages as msg, index (msg.id)}
   <Message
     {msg}
     messagesSameAuthor={messagesSameAuthor(index)}
-    on:showContextMenu={toggleContextMenu}
+    on:showContextMenu={e => displayContextMenu(e, msg)}
   />
 {/each}
 
 {#if showContextMenu}
-  <div class="fixed bg-white p-4" style="left: {pos.x}px; top:{pos.y}px;">
-    {pos.x} {pos.y}
-  </div>
+  <ContextMenu
+    {...pos}
+    {activeMsg}
+    on:clickoutside={() => showContextMenu = false}
+    on:delete={onDelete}
+  />
 {/if}

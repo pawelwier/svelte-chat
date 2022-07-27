@@ -17,11 +17,10 @@
 </script>
 
 <div
-  transition:fade="{{ duration: 300 }}"
+  transition:fade={{ duration: 300 }}
   class="msg text-white {isAuthor ? 'msg-author justify-end' : 'msg-regular'}"
-  on:contextmenu|preventDefault={e => dispatch('showContextMenu', e)}
 >
-  <div>
+  <div on:contextmenu|preventDefault={e => dispatch('showContextMenu', e)}>
     <div class="msg-content {next ? 'mb-0' : 'mb-1'} {!next && 'rounded-b-lg'} {!prev && 'rounded-t-lg'}">
       {@html msg.content}
     </div>
