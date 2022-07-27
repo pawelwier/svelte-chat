@@ -25,6 +25,12 @@ export const messages = [
   },
   {
     id: 5,
+    authorId: 1,
+    content: "oi,mmjk nunhjgj gytfn egfd hgd cxvcxvb ewt",
+    createdAt: new Date("2022/07/25 12:46:04")
+  },
+  {
+    id: 6,
     authorId: 3,
     content: "poi qwer wqerfsdfv dfgsdg df sdf cxvcxvb ewt qwer wqerfsdfv dfgsdg df sdf cxvcxvb ewt",
     createdAt: new Date("2022/07/25 12:46:13")

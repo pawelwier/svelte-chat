@@ -1,22 +1,31 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+ 	import { fade } from 'svelte/transition'
 	import Signature from './Signature.svelte'
 
-  export let msg
-  export let displayAuthor = true
-  
-  let isAuthor
+  const dispatch = createEventDispatcher()
 
   let USER_ID = 1 // TODO: move to store
+  
+  export let msg
+  export let messagesSameAuthor
 
+  let isAuthor
+  
   $: isAuthor = msg.authorId === USER_ID
+  $: [prev, next] = [messagesSameAuthor.prev, messagesSameAuthor.next]
 </script>
 
-<div class="msg text-white {isAuthor ? 'msg-author justify-end' : 'msg-regular'}">
+<div
+  transition:fade="{{ duration: 300 }}"
+  class="msg text-white {isAuthor ? 'msg-author justify-end' : 'msg-regular'}"
+  on:contextmenu|preventDefault={e => dispatch('showContextMenu', e)}
+>
   <div>
-    <div class="msg-content rounded">
+    <div class="msg-content {next ? 'mb-0' : 'mb-1'} {!next && 'rounded-b-lg'} {!prev && 'rounded-t-lg'}">
       {@html msg.content}
     </div>
-    {#if displayAuthor}
+    {#if !next}
     <div class="author relative bottom-2 left-6 rounded-lg rounded-t-none">
       <Signature 
         {isAuthor}
@@ -34,10 +43,9 @@
   }
   
   .msg-content {
-    margin: 0.3vw;
     padding: 0.5vw 1.2vw;
     max-width: 25vw;
-    min-width: 10vw;
+    min-width: 12vw;
   }
 
   .msg-author .msg-content,

@@ -1,4 +1,5 @@
 <script>
+ 	import { fade } from 'svelte/transition'
   import { format } from 'date-fns'
   import { configStore } from '../store/configStore'
   import { users } from "../data/users"
@@ -26,6 +27,8 @@
 <div class="text-xs pl-2">
   {getName()}
   {#if displayMsgDate}
-    {formatDate(createdAt)}
+    <span transition:fade>
+      {formatDate(createdAt)}
+    </span>
   {/if}
 </div>
